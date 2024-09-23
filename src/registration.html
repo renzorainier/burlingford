@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Burlingford University</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Firebase SDK URLs -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js"></script>
+
+    <!-- Firebase configuration script -->
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="registration.js"></script>
+
+    <style>
+        .bg-custom {
+            background-color: #600010; /* Primary color */
+        }
+
+        .text-custom {
+            color: #600010; /* Primary text color */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-300 min-h-screen flex items-center justify-center">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full text-center">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">Create Your Account</h1>
+        <p class="text-gray-600 mb-8">Please register to get started.</p>
+
+        <!-- Google Sign-In Button -->
+        <button id="googleSignInButton" class="w-full bg-white text-custom font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-300 hover:bg-gray-100">
+            Sign up with Google
+        </button>
+
+        <!-- Error Message -->
+        <div id="error-message" class="text-red-500 mt-4 hidden"></div>
+
+        <!-- Form to collect additional information after Google sign-in -->
+        <div id="studentForm" class="mt-6 hidden">
+            <form id="additionalInfoForm" class="space-y-6">
+
+                <div>
+                    <label for="name" class="block text-left text-gray-700 font-medium">Full Name</label>
+                    <input type="text" id="name" class="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-custom transition" required>
+                </div>
+
+                <div>
+                    <label for="email" class="block text-left text-gray-700 font-medium">Email</label>
+                    <input type="email" id="email" class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100" disabled>
+                </div>
+
+                <div>
+                    <label for="age" class="block text-left text-gray-700 font-medium">Age</label>
+                    <input type="number" id="age" min="18" class="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-custom transition" required>
+                </div>
+
+                <div>
+                    <label for="yearLevel" class="block text-left text-gray-700 font-medium">Year Level</label>
+                    <select id="yearLevel" class="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-custom transition" required>
+                        <option value="" disabled selected>Select Year Level</option>
+                        <option value="1st Year">1st Year</option>
+                        <option value="2nd Year">2nd Year</option>
+                        <option value="3rd Year">3rd Year</option>
+                        <option value="4th Year">4th Year</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="course" class="block text-left text-gray-700 font-medium">Course Planning to Enroll</label>
+                    <select id="course" class="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-custom transition" required>
+                        <option value="" disabled selected>Select Course</option>
+                        <option value="Bachelor of Science in Computer Science">Bachelor of Science in Computer Science</option>
+                        <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
+                        <option value="Master of Science in Data Science">Master of Science in Data Science</option>
+                        <option value="Bachelor of Science in Cybersecurity">Bachelor of Science in Cybersecurity</option>
+                        <option value="Master of Science in Artificial Intelligence">Master of Science in Artificial Intelligence</option>
+                        <option value="Doctor of Philosophy in Computer Engineering">Doctor of Philosophy in Computer Engineering</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="phone" class="block text-left text-gray-700 font-medium">Phone Number</label>
+                    <input type="tel" id="phone" class="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-custom transition" pattern="^09[0-9]{9}$" required>
+                    <small class="text-gray-500">Format: 09XXXXXXXXX</small>
+                </div>
+
+                <div>
+                    <label for="address" class="block text-left text-gray-700 font-medium">Address</label>
+                    <input type="text" id="address" class="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-custom transition" required>
+                </div>
+
+                <div>
+                    <label for="gender" class="block text-left text-gray-700 font-medium">Gender</label>
+                    <select id="gender" class="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-custom transition" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="emergencyContactName" class="block text-left text-gray-700 font-medium">Emergency Contact Name</label>
+                    <input type="text" id="emergencyContactName" class="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-custom transition" required>
+                </div>
+
+                <div>
+                    <label for="emergencyContactPhone" class="block text-left text-gray-700 font-medium">Emergency Contact Phone</label>
+                    <input type="tel" id="emergencyContactPhone" class="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-custom transition" pattern="^09[0-9]{9}$" required>
+                    <small class="text-gray-500">Format: 09XXXXXXXXX</small>
+                </div>
+
+                <div>
+                    <label for="parentName" class="block text-left text-gray-700 font-medium">Parent/Guardian Name</label>
+                    <input type="text" id="parentName" class="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-custom transition" required>
+                </div>
+
+                <button type="submit" id="registerButton" class="w-full bg-custom hover:bg-opacity-80 text-white font-bold py-2 px-4 rounded-lg transition duration-300" disabled>
+                    Complete Registration
+                </button>
+            </form>
+        </div>
+
+        <!-- Button to go back to the home page -->
+        <button onclick="window.location.href='index.html';" class="mt-6 w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+            Home
+        </button>
+    </div>
+</body>
+
+</html>

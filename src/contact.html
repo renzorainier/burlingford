@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Burlingford University</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .bg-deep-red {
+            background-color: #5a000d;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <section class="bg-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-deep-red">Contact Burlingford University</h1>
+                <p class="mt-4 text-gray-600">We'd love to hear from you!</p>
+            </div>
+
+            <!-- Centering Form with Flexbox -->
+            <div class="flex justify-center">
+                <form id="contactForm" class="bg-white p-6 md:p-8 lg:p-12 shadow-lg rounded-lg w-full max-w-lg">
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
+                        <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 p-2 rounded-md text-base md:text-lg lg:text-xl" placeholder="Enter your name" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full border border-gray-300 p-2 rounded-md text-base md:text-lg lg:text-xl" placeholder="Enter your email" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                        <textarea id="message" name="message" rows="4" class="mt-1 block w-full border border-gray-300 p-2 rounded-md text-base md:text-lg lg:text-xl" placeholder="Your message..." required></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <button type="submit" class="w-full bg-deep-red text-white py-2 md:py-3 lg:py-4 rounded-md text-base md:text-lg lg:text-xl hover:bg-red-900">Send Message</button>
+                    </div>
+                    <div id="statusMessage" class="mt-4 text-center"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("hZoFGLe6Vh3fnlOKY");
+        })();
+
+        document.getElementById('contactForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const statusMessage = document.getElementById('statusMessage');
+
+            const templateParams = {
+                to_email: formData.get('email'),
+                name: formData.get('name'),
+                message: formData.get('message')
+            };
+
+            try {
+                const response = await emailjs.send("service_burlingford", "template_f8aap9l", templateParams);
+
+                if (response.status === 200) {
+                    statusMessage.textContent = "Message sent. We will reply to you soon!";
+                    statusMessage.classList.add('text-green-600');
+                } else {
+                    statusMessage.textContent = "Failed to send message. Please try again.";
+                    statusMessage.classList.add('text-red-600');
+                }
+            } catch (error) {
+                console.error("Error sending email:", error);
+                statusMessage.textContent = "An error occurred. Please try again later.";
+                statusMessage.classList.add('text-red-600');
+            }
+        });
+    </script>
+
+    <footer class="bg-deep-red text-white py-6">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Burlingford University. All rights reserved.</p>
+        </div>
+        <div class="max-w-7xl mx-auto text-center mt-8">
+            <a href="main.html" class="bg-white text-red-900 px-6 py-3 rounded-full font-semibold hover:bg-blue-100 transition duration-300 transform hover:scale-105">Return to Home page</a>
+        </div>
+    </footer>
+</body>
+</html>

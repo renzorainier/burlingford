@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - University</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <!-- Firebase SDK URLs for v10.13.2 -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js"></script>
+
+  <!-- Firebase configuration script -->
+  <script type="module" src="firebase-config.js"></script>
+
+  <!-- Authentication logic -->
+  <script type="module">
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+    import { auth } from './firebase-config.js';
+
+    const authInstance = getAuth();
+    onAuthStateChanged(authInstance, (user) => {
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+
+
+  <!-- Smooth scrolling and animations -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+
+    }
+    .bg-burgundy-cream {
+      background: linear-gradient(to right, #600010 50%, #F5F5DC);
+    }
+    .bg-deep-red {
+background-color:#600010 ;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Header Section -->
+  <header class="bg-burgundy-cream text-white py-6 shadow-md">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <h1 class="text-4xl font-extrabold tracking-tight animate-fade-in">About Our University</h1>
+    </div>
+  </header>
+
+  <!-- Facilities Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl text-center mb-12 animate-slide-in">Campus Facilities</h2>
+      <p class="text-lg text-center max-w-2xl mx-auto mb-12 opacity-0 animate-fade-in">
+        Our campus is equipped with modern facilities such as state-of-the-art libraries, advanced laboratories, expansive sports areas, and more. We strive to provide the best resources to support student learning and growth.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="bg-gray-50 p-8 rounded-lg shadow-lg text-center hover:shadow-xl transition-transform transform hover:scale-105">
+          <h3 class="text-red-900 text-2xl font-bold mb-4">Library</h3>
+          <p>Explore our extensive collection of books, journals, and digital resources in our well-equipped library.</p>
+        </div>
+        <div class="bg-gray-50 p-8 rounded-lg shadow-lg text-center hover:shadow-xl transition-transform transform hover:scale-105">
+          <h3 class="text-red-900 text-2xl font-bold mb-4">Laboratories</h3>
+          <p>Our laboratories provide cutting-edge technology to foster hands-on learning and innovation.</p>
+        </div>
+        <div class="bg-gray-50 p-8 rounded-lg shadow-lg text-center hover:shadow-xl transition-transform transform hover:scale-105">
+          <h3 class="text-red-900 text-2xl font-bold mb-4">Sports Facilities</h3>
+          <p>We offer a range of sports facilities, including fields, courts, and a gym, to promote a healthy lifestyle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Special Programs Section -->
+  <section class="py-16 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl text-center mb-12 animate-slide-in">Special Programs</h2>
+      <p class="text-lg text-center max-w-2xl mx-auto mb-12 opacity-0 animate-fade-in">
+        We offer a variety of special programs aimed at enhancing the student experience, including exchange programs, research opportunities, and scholarships.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div class="bg-gray-50 p-8 rounded-lg shadow-lg text-center hover:shadow-xl transition-transform transform hover:scale-105">
+          <h3 class="text-red-900 text-2xl font-bold mb-4">Exchange Programs</h3>
+          <p>Participate in our global exchange programs to experience different cultures and academic environments.</p>
+        </div>
+        <div class="bg-gray-50 p-8 rounded-lg shadow-lg text-center hover:shadow-xl transition-transform transform hover:scale-105">
+          <h3 class="text-red-900 text-2xl font-bold mb-4">Research Opportunities</h3>
+          <p>Engage in groundbreaking research across various disciplines with the support of our expert faculty.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="bg-deep-red text-white py-6">
+    <div class="container mx-auto text-center">
+      <p>&copy; 2024 Burlingford University. All rights reserved.</p>
+  </div>
+  <div class="max-w-7xl mx-auto text-center mt-8">
+      <a href="main.html" class="bg-white text-red-900 px-6 py-3 rounded-full font-semibold hover:bg-blue-100 transition duration-300 transform hover:scale-105">Return to Home page</a>
+
+  </footer>
+  <!-- Animation using Tailwind's @keyframes -->
+  <style>
+    .animate-fade-in {
+      animation: fadeIn 1.5s ease-in-out forwards;
+    }
+
+    .animate-slide-in {
+      animation: slideIn 1s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      0% { transform: translateY(50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+
+</body>
+</html>

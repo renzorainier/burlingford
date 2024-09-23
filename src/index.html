@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Burlingford University</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Firebase SDK URLs for v10.13.2 -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js"></script>
+
+  <!-- Firebase configuration script -->
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="login.js"></script>
+
+  <style>
+    .bg-custom {
+      background-color: #600010;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-300 text-gray-800 min-h-screen flex items-center justify-center">
+  <div class="rounded-lg shadow-lg flex flex-col md:flex-row w-full max-w-4xl overflow-hidden">
+    <!-- Logo Section -->
+    <div class="md:w-1/2 p-10 flex flex-col justify-center items-center bg-white">
+      <img src="../imgs/logo.png" alt="Burlingford University Logo" class="mb-6 mx-auto h-48 md:h-64 transition-transform duration-300 hover:scale-105">
+    </div>
+
+    <!-- Login Form Section -->
+    <div class="md:w-1/2 p-8 flex flex-col justify-center items-center bg-custom text-white">
+      <h1 class="text-4xl font-bold mb-4">Welcome Back!</h1>
+      <p class="mb-8 text-lg">Please log in to continue.</p>
+
+      <!-- Google Sign-In Button -->
+      <button id="googleSignInButton" class="w-full bg-white text-custom font-bold py-2 px-4 rounded-lg shadow hover:shadow-lg transition duration-300 hover:bg-gray-100">
+        <span class="text-custom">Log In with Google</span>
+      </button>
+
+      <!-- Error Message -->
+      <div id="login-error-message" class="text-red-500 mt-4 hidden"></div>
+
+      <!-- Link to Registration Page -->
+      <p class="mt-6 text-sm">Don't have an account?
+        <a href="registration.html" class="text-blue-400 hover:underline">Register here</a>
+      </p>
+    </div>
+  </div>
+
+  <style>
+    /* Additional Styles for Better Visibility */
+
+    .text-custom {
+      color: #600010; /* Using the primary color for text */
+    }
+
+    .bg-custom {
+      background-color: #600010; /* Keep the custom background color */
+    }
+
+    .bg-custom p,
+    .bg-custom h1 {
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add a subtle shadow for text visibility */
+    }
+  </style>
+</body>
+
+</html>

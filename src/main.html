@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Burlingford University - Shaping Future Innovators</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Firebase SDK URLs for v10.13.2 -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js"></script>
+  <script type="module" src="firebase-config.js"></script>
+
+  <style>
+    .fade-in {
+      animation: fadeIn 1.5s ease-in forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .scale-up {
+      transform: scale(0.95);
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .scale-up:hover {
+      transform: scale(1.05);
+    }
+
+    .slide-up {
+      animation: slideUp 1s ease-in-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .bg-burgundy-cream {
+      background: linear-gradient(to right, #600010 50%, #F5F5DC);
+    }
+
+    .bg-deepred {
+      background-color: #600010;
+    }
+
+    header h1 {
+      font-family: 'EB Garamond', serif;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Sidebar Section -->
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-deepred text-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50">
+      <div class="p-6">
+        <h2 class="text-3xl font-bold mb-4">Menu</h2>
+        <ul>
+          <li class="mb-4"><a href="index.html" class="text-white hover:text-gray-400">Home</a></li>
+          <li class="mb-4"><a href="about.html" class="text-white hover:text-gray-400">About Us</a></li>
+          <li class="mb-4"><a href="programs.html" class="text-white hover:text-gray-400">Programs</a></li>
+          <li class="mb-4"><a href="contact.html" class="text-white hover:text-gray-400">Contact</a></li>
+          <li class="mb-4"><a href="studentinfo.html" class="text-white hover:text-gray-400">Student Info</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1">
+      <!-- Toggle Button -->
+      <button id="menu-btn" class="m-2 p-2 text-sm sm:m-4 sm:p-4 sm:text-base bg-deepred text-white rounded-md">☰ Menu</button>
+      <!-- Header Section -->
+      <header class="bg-burgundy-cream text-white py-4 sm:py-6">
+        <div class="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 h-full">
+            <!-- Logo and University Name -->
+            <div class="flex items-center space-x-3">
+                <img src="../imgs/logo.png" alt="Tech University Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-semibold">Burlingford University</h1>
+            </div>
+            <!-- Explore Programs Button -->
+            <a href="#programs" class="bg-white text-red-700 px-4 py-2 sm:px-6 sm:py-3 rounded-full font-medium hover:bg-gray-100 transition duration-200">
+                Explore Programs
+            </a>
+        </div>
+    </header>
+
+      <!-- Hero Section with Carousel -->
+      <section class="relative bg-cover bg-center" style="background-image: url('hero-image.jpg');">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+
+        <!-- Carousel Container -->
+        <div id="carouselExampleCaptions" class="carousel slide relative z-10" data-bs-ride="carousel">
+
+          <!-- Carousel Indicators -->
+          <div class="carousel-indicators mb-4">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+
+          <!-- Carousel Inner -->
+          <div class="carousel-inner">
+            <!-- First Slide -->
+            <div class="carousel-item active">
+              <img src="../imgs/image1.jpg" class="d-block w-full object-cover" style="height: 400px;" alt="Slide 1">
+              <div class="carousel-caption text-left">
+                <h5 class="text-5xl font-bold mb-4 text-white slide-up">Empowering the Innovators of Tomorrow</h5>
+                <p class="text-lg text-white mb-6 slide-up delay-150">At Burlingford University, we provide the tools and knowledge to lead the future of technology.</p>
+              </div>
+            </div>
+
+            <!-- Second Slide -->
+            <div class="carousel-item">
+              <img src="../imgs/image3.jpg" class="d-block w-full object-cover" style="height: 400px;" alt="Slide 2">
+              <div class="carousel-caption text-left">
+                <h5 class="text-5xl font-bold mb-4 text-white slide-up">Shaping Future Technologists</h5>
+                <p class="text-lg text-white mb-6 slide-up delay-150">Pioneering advancements in AI, Cybersecurity, and more.</p>
+              </div>
+            </div>
+
+            <!-- Third Slide -->
+            <div class="carousel-item">
+              <img src="../imgs/image2.jpg" class="d-block w-full object-cover" style="height: 400px;" alt="Slide 3">
+              <div class="carousel-caption text-left">
+                <h5 class="text-5xl font-bold mb-4 text-white slide-up">Building a Better Tomorrow</h5>
+                <p class="text-lg text-white mb-6 slide-up delay-150">Join us on a journey of technological innovation.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Carousel Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon rounded-full p-3" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon  rounded-full p-3" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Mission and Vision Section -->
+      <section class="py-16 bg-white fade-in">
+        <div class="max-w-7xl mx-auto px-4">
+          <h2 class="text-4xl font-bold text-center mb-8 slide-up">Our Mission & Vision</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-gray-50 p-8 rounded-lg shadow-lg transition scale-up">
+              <h3 class="text-3xl font-semibold text-red-800 mb-4">Our Mission</h3>
+              <p>At Burlingford University, we strive to foster a passion for technology and innovation. Our mission is to equip students with the skills and knowledge to thrive in the ever-evolving tech landscape.</p>
+            </div>
+            <div class="bg-gray-50 p-8 rounded-lg shadow-lg transition scale-up">
+              <h3 class="text-3xl font-semibold text-red-900 mb-4">Our Vision</h3>
+              <p>To be a leading institution producing forward-thinking technologists who will shape the future of the digital world.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Programs Section -->
+      <section id="programs" class="py-16 bg-gray-100 fade-in">
+        <div class="max-w-7xl mx-auto px-4">
+          <h2 class="text-4xl font-bold text-center mb-8 slide-up">Explore Our Featured Programs</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition scale-up">
+              <h3 class="text-2xl font-semibold text-red-800 mb-4">Bachelor of Science in Computer Science</h3>
+              <p>Explore the foundations of computer science, programming, data structures, and algorithms in this comprehensive degree.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition scale-up">
+              <h3 class="text-2xl font-semibold text-red-800 mb-4">Bachelor of Science in Information Technology</h3>
+              <p>Gain skills in systems administration, networking, cybersecurity, and database management to prepare for a dynamic IT career.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition scale-up">
+              <h3 class="text-2xl font-semibold text-red-800 mb-4">Master of Science in Data Science</h3>
+              <p>Master the world of big data, machine learning, and data visualization techniques to turn raw data into valuable insights.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition scale-up">
+              <h3 class="text-2xl font-semibold text-red-800 mb-4">Bachelor of Science in Cybersecurity</h3>
+              <p>Learn how to defend digital infrastructures from cyber threats, and become a leader in the world of cybersecurity.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition scale-up">
+              <h3 class="text-2xl font-semibold text-red-800 mb-4">Master of Science in Artificial Intelligence</h3>
+              <p>Delve into the intricacies of AI, neural networks, and deep learning to lead the future of intelligent systems.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition scale-up">
+              <h3 class="text-2xl font-semibold text-red-800 mb-4">Doctor of Philosophy in Computer Engineering</h3>
+              <p>Pursue cutting-edge research in hardware, software, and embedded systems, and push the boundaries of technological advancement.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Section -->
+      <footer class="bg-gray-900 text-gray-300 py-8">
+        <div class="max-w-7xl mx-auto px-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            <div>
+              <h3 class="text-lg font-semibold text-white mb-4">About Us</h3>
+              <p>Burlingford University is committed to providing world-class education and fostering technological innovation for a better tomorrow.</p>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-white mb-4">Programs</h3>
+              <ul>
+                <li><a href="#" class="hover:underline">Computer Science</a></li>
+                <li><a href="#" class="hover:underline">Information Technology</a></li>
+                <li><a href="#" class="hover:underline">Data Science</a></li>
+                <li><a href="#" class="hover:underline">Cybersecurity</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-white mb-4">Contact</h3>
+              <p>Email: burlingford@gmail.com</p>
+              <p>Phone: (+632) 8911-7199</p>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-white mb-4">Follow Us</h3>
+              <div class="flex space-x-4">
+                <a href="#" class="hover:text-gray-400"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="#" class="hover:text-gray-400"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#" class="hover:text-gray-400"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="#" class="hover:text-gray-400"><i class="fab fa-instagram"></i> Instagram</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 text-center">
+            <p>&copy; 2024 Burlingford University. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const menuBtn = document.getElementById('menu-btn');
+
+    menuBtn.addEventListener('click', () => {
+      if (sidebar.classList.contains('-translate-x-full')) {
+        sidebar.classList.remove('-translate-x-full');
+      } else {
+        sidebar.classList.add('-translate-x-full');
+      }
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
